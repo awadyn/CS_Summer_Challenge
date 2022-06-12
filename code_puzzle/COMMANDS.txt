@@ -1,0 +1,43 @@
+### gdb
+help <class>
+
+file puzzle.o (loads only user-defined symbols)
+break <addr>
+info variables
+info functions
+display <var>
+whatis <var>
+
+nm -C --numeric-sort puzzle.o
+nm -C --numeric-sort --defined-only puzzle.o
+
+### gdb
+gdb puzzle
+info variables --> see some familiar variable names
+info functions --> see some familiar function names
+# start exploring
+break main
+# see callq ... <get_list>
+# see callq ... <print_list>
+# see callq ... <sort_list>
+# see callq ... <get_median>
+break get_list, print_list, sort_list, get_median
+# see <median>
+print (int)median
+print &median
+x/d <median address>
+display $median  --> note $ to get value of median as an integer
+ni  --> watch value of median displayed at every instruction
+c
+# hit get_list
+# nothing familiar in code, except printf and scanf
+# continue and observe value of list
+c
+# hit print_list, find list addr
+x/d <list addr>
+x/5d <list_addr>
+display /d {*<list addr>, *<list addr + 4>, ...}
+## understanding arrays in memory, layout and rules
+## arrive at get_median
+## note only way to fix issue is by changing rax register
+## explaining registers, referencing binary translation
