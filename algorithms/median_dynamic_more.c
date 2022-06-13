@@ -18,7 +18,6 @@ int median_index;
 
 int print_list() {
 	int i;
-	// NOTE list_size
 	for (i = 0; i < list_size; i ++) {
 		printf("%d ", list[i]);
 	}
@@ -63,12 +62,13 @@ int insert() {
 	scanf("%d", &new_entry);
 
 	int new_index = search_index(new_entry);
-	printf("Inserting %d at index %d\n", new_entry, new_index);	
+	printf("Inserting %d at index %d ...\n", new_entry, new_index);	
 
-	// NOTE: do not change creating and initializing new list locally
-	// NOTE: --> will cause logical error
 	list_size = list_size + 1;
-	int new_list[list_size];
+	
+	// new NOTE needing dynamic memory allocation for new list
+	//	to maintain new list values after function terminates
+	int* new_list = (int*)malloc(list_size * sizeof(int));
 
 	int i;
 	for (i = 0; i < new_index; i ++)
@@ -78,13 +78,13 @@ int insert() {
 		new_list[i] = list[i-1];
 
 	printf("list address = %p\n", list);
+	// new
+	// NOTE heap address
 	printf("new list address = %p\n", new_list);
 
 	list = new_list;
 	
 	printf("New list: \n");
-	// NOTE: no error here, but print only shows 5 elements
-	// --> local stack list is still alive before function terminates
 	print_list();
 	
 	return 0;
@@ -117,12 +117,6 @@ int sort_list() {
 
 
 void get_median() {
-	// NOTE bug if we dont change this,
-	//	as sizeof(list) = sizeof(int *) now
-	//median_index = (sizeof(list)/sizeof(int))/2;
-
-	// NOTE start by hard-coding list size
-	//	then use this solution
 	median_index = list_size/2;
 	median = list[median_index];
 }
@@ -134,9 +128,7 @@ int main() {
 	if (rc == 0) {
 		printf("Successfully read integer list: ");
 		print_list();
-		// NOTE: list is a pointer variable in its own reserved memory
-		//	 list contents reside in another part of reserved memory
-		//	 the value of the list pointer is the address of the list contents
+		// NOTE different between value of list and &list
 		printf("Address of list pointer variable = %p\n", &list);
 		printf("Address of list elements: %p\n", list);
 	} else printf("Unsuccessful list entry.\n");

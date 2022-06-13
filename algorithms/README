@@ -1,0 +1,57 @@
+##################
+
+## Implementing median program using const. size list:
+### Get list from user - get_list()
+### Sort list - sort_list()
+### Display list - print_list()
+### Get median of list - get_median()
+
+##################
+
+## Implementing median program using variable size list:
+### Insert new element from user to list - instert()
+### Linear search list for new element index - search()
+
+## Stages:
+### Adding list_size variable
+### Implementing linear search algorithm
+### Adding new element to same list:
+	Segmentation fault - list out of bound
+### Adding new element to new list of size list_size + 1:
+	Incorrect list = new_list assignment
+	--> statically assigned lists cannot change
+### Using dynamically assigned lists:
+	--> note changing from array type to pointer type
+	--> note pointers are un-constrained by a list size
+	--> note changing get_list, but everything else stays the same
+		--> note similarity in using arrays and pointers
+		--> a pointer is an array with no fixed size
+		--> NOTE printing out memory pointer values
+### Adding new element to dynamically sized list:
+	Logical error - new_list data is lost when func. terminates
+	--> understanding local data and global data
+### Adding new element to new dynamically sized local list
+	--> SUCCESS
+	--> NOTE freeing old list?
+
+##################
+
+## Implementing median program with resizable list:
+	no need for new list with each insert
+
+## Stages
+### Explaining a linked list, doubly linked list
+	--> it is like an array where each element is a node data type
+		and each element knows its surrounding elements
+	--> each node struct holds not only a value but a 
+		pointer to its adjacent node
+### Implementing a list node
+...
+### Implementing insert: no need for new list, just change pointers
+
+################
+### Changing search to binary search
+### changing doubly linked list to bst
+### insert in bst, search in bst
+	
+
