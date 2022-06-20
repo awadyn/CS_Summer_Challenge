@@ -41,32 +41,79 @@ def print_node_list():
 	print()
 
 
-def print_branches(root):
+def print_branches(root, depth):
 	if (root.left == None):
-		print(" |    ", end='')
+		for i in range(0, depth * 3):
+			print(" ", end='')
+
+		print(" / ", end='')
 		return
 	else:
-		print(" | " , root.left.value, " -- ", end='')
+		for i in range(0, depth *3):
+			print(" ", end='')
+		print(" / " , root.left.value, " ", end='')
+
 	if (root.right == None):
-		print("    \ ", end='')
+		for i in range(0, depth * 3):
+			print(" ", end='')
+
+		print(" \ ", end='')
 		return
 	else:
+		for i in range(0, depth * 3):
+			print(" ", end='')
+
 		print(root.right.value, " \ ", end='')
-	print(" ")
-	print_branches(root.left)
-	print_branches(root.right)
+
+	print()
+	print_branches(root.left, depth - 1)
+	print_branches(root.right, depth - 1)
 
 
 
 def print_node_tree():
 	global node_tree
 
-	print(" | ", node_tree.value, " \ ", end='')
-	print(" ")
-	print_branches(node_tree)
-	print(" ")
+	import math
+	depth = int(math.log2(list_size))
 
-	
+	for i in range(0, depth * 3):
+		print(" ", end='')
+
+	print(" / ", node_tree.value, " \ ", end='')
+	print()
+
+	print_branches(node_tree, depth - 1)
+	print()
+
+def print_tree_level(root, level, height):
+	if (root == None):
+		print("  ", end='')
+		return
+	# print root of this level
+	if (level == 1):
+		print(root.value, end='')
+	elif (level > 1):
+		print_tree_level(root.left, level-1, height-1)
+		for j in range(0, 2**(height + 1 - level) - 1):
+			print("  ", end='')
+		print_tree_level(root.right, level-1, height-1)
+
+def print_tree_temp(root):
+	global list_size
+
+	import math
+	depth = int(math.log2(list_size))
+	height = depth + 1
+	print("depth = ", depth)
+	print("height = ", height)
+
+	for i in range(1, height + 1):
+		for j in range(0, 2**(height - i) - 1):
+			print("  ", end='')
+		print_tree_level(root, i, height)
+		print()
+
 
 # recursive thinking, divide and conquer the problem
 # each time dividing the list in half to convert it
@@ -74,26 +121,24 @@ def print_node_tree():
 # NOTE: root variable is new in every recursion stack frame
 def convert_to_bst(sorted_list):
 	n = len(sorted_list)
+
 	if (n == 0):
 		return None
+
 	# NOTE: initialize root of this sorted_list
 	root = Node()
 	root.value = sorted_list[int(n/2)]
+
 	# NOTE: this is a leaf node
 	# all calls to this function will return here and assign
 	# leaf nodes correctly - prior root left or right
 	if (n == 1):
-		print("root value : ", root.value)
 		return root;
 	else:
-		print(root.value)
 		left_list = sorted_list[0 : int(n/2)]
-		print(left_list)
 		right_list = sorted_list[int(n/2) + 1 :]
-		print(right_list)
 		root.left = convert_to_bst(left_list)
 		root.right = convert_to_bst(right_list)
-		print("root value : ", root.value)
 		return root
 
 
@@ -184,7 +229,13 @@ def main():
 
 	convert_list()
 	print("Node tree = ")
-	print_node_tree()
+#	print_node_tree()
+#	print(node_tree.value, " : ")
+#		if (root.left != None):
+#			print(root.left.value, " : ", end='')
+#			if (root.right != None):
+#				print(root.right.value)
+	print_tree_temp(node_tree)	
 
 #	insert()
 #	print("New list  = ")
