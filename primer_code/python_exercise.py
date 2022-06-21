@@ -21,8 +21,49 @@
 #
 # write your code below:
 ########################
+x1 = 0			# global variable to store operand 1 of calculation
+x2 = 0			# global variable to store operand 2 of calculation
+result = 0		# global variable to store result of calculation
+
+
+def get_input():
+	global x1		# sometimes we have to declare using global variables in Python
+	global x2
+
+	print("Enter your first value:")
+	input1 = input()
+	# casting operation to change data type from string to integer
+	x1 = int(input1)
+	print("Enter your second value:")
+	input2 = input()
+	x2 = int(input2)
 
 
 
+def add(x, y):
+	sum = x + y
+	return sum
 
+def subtract(x, y):
+	diff = x - y
+	return diff
+
+def multiply(x, y):
+	product = x * y
+	return product
+
+def divide(x, y):
+	quotient = x / y
+	return quotient
+
+
+## all needed functions have been defined above
+## now we can call the functions as needed
+#
+# 1) call get_input() function to get user input
+get_input()
+
+# 2) call a calculation function and display result
+result = add(x1, x2)
+print(result)
 
