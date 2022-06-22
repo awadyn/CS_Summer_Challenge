@@ -1,0 +1,121 @@
+Writing a calculator program in C will similar to writing it in Python.
+-> The language syntax rules differ slightly, and there are more semantic rules,
+   but the logic behind the program remains the same.
+--> The chosen variables and function call order remain the same.
+
+
+
+**** SYNTAX RULES OF C ****
+-- Every code line ends with: ;
+-- Every function code block starts with: { 	and ends with: }
+-- more to come ...
+
+
+
+** FIRST RULE OF C
+-- All C programs must have a defined function called 'main':
+
+		int main() {
+			// code will go here
+		}
+
+
+-- Because C is compiled, not interpreted, it is not translated line by line.
+   Therefore, there is no implicit predefined order for the translator.
+
+-- There must be an explicitely defined order that tells the C translator about
+   what operation or function call should define the point at which the 
+   software binary begins running.
+
+-- This starting point in all C programs is the function main().
+
+
+
+** SECOND RULE OF C
+-- All C variables must have an explicitely chosen type.
+
+		int x = 0;				// versus Python: x = 0
+		char c = 'c';				// versus Python: c = 'c'
+		char* c_string = "c string"		// versus Python: c_string = "c string"
+		int func(int x, char c) { ... }		// versus Python: def func(x, c): ...
+
+
+-- The C compiler creates more performant and efficient code than the 
+   Python interpreter. That is why C is the language in which operating systems
+   and many pieces of complex software are written.
+
+-- To make the final binary code as optimal as possible, the C compiler
+   allocates only as much memory as is needed for any piece of data.
+   Since the required amount of memory is tied to the type of the data,
+   writing code in C requires specifying data types in any variable declaration.
+
+
+
+** THIRD RULE OF C
+-- All defined functions must have an explicitely chosen return type.
+
+		int add(int x, int y) {			// versus Python:
+			int sum = x + y;		// 	def add(x, y):
+			return sum;			//		sum = x + y
+		}					//		return sum
+
+
+
+**** CALCULATOR ****
+-- Execution of the software binary should start at function main().
+
+	int main() {
+		// calculator code goes here
+	}
+
+-- main() should ask the user for input1, input2, and operator.
+-- Global variables can represent the global inputs, since all calculator functions
+   will access them.
+
+	int input1, input2 = 0;
+	char operator = NULL;
+
+	void get_input() {
+		// user input code goes here
+	}
+
+	int main() {
+		get_input();
+	}
+
+-- Control flow returns to main...
+-- main() should choose an action and run the corresponding function based on the input operator.
+
+	int input1, input2 = 0;
+	char operator = NULL;
+
+	void get_input() {
+		// user input code goes here
+	}
+
+	int main() {
+		get_input();
+		
+		int result = 0;
+
+		if (operator == '+') {
+			result = add(x1, x2);
+		}
+
+		...
+
+		// print result here
+
+		return 0;
+
+	}
+
+
+
+
+
+
+
+
+
+
