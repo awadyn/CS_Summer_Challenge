@@ -44,17 +44,6 @@ def add(x, y):
 	sum = x + y
 	return sum
 
-def subtract(x, y):
-	diff = x - y
-	return diff
-
-def multiply(x, y):
-	product = x * y
-	return product
-
-def divide(x, y):
-	quotient = x / y
-	return quotient
 
 
 ## all needed functions have been defined above
